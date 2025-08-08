@@ -1,0 +1,96 @@
+CSR: Sends ProductList code as JS to browser
+RSC: Keeps ProductList on server, sends only HTML result — reducing bundle size
+Server components are executed first and has no js code (minimal)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+if you want to remove a folder from the routes you have to add the underscore convention to the folder name like that: _components
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1-to have a different title in each page you have to set the metadata in each page like this:
+export const metadata={
+  title:"cabins"
+}
+2-you can add a dynamic value to the title like that:
+export const metadata={
+  title:{
+    template:"%s | The Wild Oasis",
+    default:"Welcome | The Wild Oasis"
+  }
+}
+but the title you want to appear instead of the %s must be exported from the 
+and you can have default value if there is a page that does not have its own title 
+3-you can also add the description tag to improve the SEO(Search Engine Optimization) like this:
+export const metadata={
+  title:{
+    template:"%s | The Wild Oasis",
+    default:"Welcome | The Wild Oasis"
+  },
+  description:"Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful mountains and dark forests."
+}
+4-to add a favicon(the small icon for your website) you just get your photo and place it in the root of the app folder and just rename it to "icon" and that's it
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LOADING AND OPTMIZING FONTS STEPS:
+1-import {Josefin_Sans} from "next/font/google"
+2-const josefin = Josefin_Sans({
+    subsets:["latin"],
+    display:"swap"
+});
+3-<body className= {`${josefin.className} bg-primary-950 text-primary-300 min-h-screen`}>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+max-w-7xl:sets the max width for the element even for giant screens
+mx-auto:centers the element horizontally in its container — but only if it has a defined width or max-width, like you do here with max-w-7xl.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OPTMIZING IMAGES (HUGELY IMPORTANT):
+1-use the <Image/> from next/image (import it)
+2-it automatically adds lazy loading to the image
+3-Automatically generates responsive images 
+4-you have to the specify the width and height properties
+5-if you do not want to specify the width and height import your image at the top and assign it to the src prop on the <Image> component
+6-you can also set the percentage of the quality by assinging the it to the quality prop like that: quality={10} (the higher the better)
+7-placeholder="blur" that makes it blurred while the image loads and you can only use it when you are setting the src of the image to an imported image only
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ADDING A LAYOUT IN NESTED PAGES(LIKE A SIDE BAR)
+1-just create a layout component inside the directory(the pages that needs this layout)
+2-for example adding a side bar in the account directory so it can be visible only inside the account and reservation and profile pages
+3-make sure this component receive the children prop to use the pages that you want to appear beside the side bar
+4-the children prop is the prop that is available in any ordinary layout component
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ENVIRONMENT VARIABLES:
+1-it protect a sensitive data from being leaked to the browser by being stored only in the application(server) not in the browser
+2-however if you want them to be leaked to the browser you can add this prefix to the variable name => NEXT_PUBLIC like this for example:
+NEXT_PUBLIC_SOME_VAR=23
+3-we are going to store the service_role key from supabase in the .env file(to not get leaked to the browser) because it can bypass the row level security(it adds certain permission to each table like we
+were allowing only authenticated users to view the cabin but we do not want that we want to allow all users not just the authenticated to be able to see the view the cabins
+)
+4-Use ! (non-null assertion):If you're sure the variables will always be defined (e.g., because you’ve added them in your .env file) like this:
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_KEY!
+);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SEO FRIENDLY:
+Google crawls and indexes the content it sees in the initial HTML response. If your data comes later (via client-side fetch), Google might miss it or rank it lower.
+So when you use Next.js server components:
+1-You give Google complete HTML with real content (cabins, product names, blog titles, etc.).
+2-That makes your app more SEO-friendly and loads faster, especially for first-time users.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+🧠 Client Component with useEffect (Browser-side Fetch)
+| Aspect                    | Explanation                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------- |
+| **Where data is fetched** | In the **browser**, after the component mounts                                    |
+| **When data is fetched**  | After render (in `useEffect`)                                                     |
+| **Initial render**        | No data — shows a loading state or blank                                          |
+| **Performance**           | Slower initial load (waits for client fetch)                                      |
+| **SEO**                   | Bad or inconsistent — search engines might crawl before data appears              |
+| **Bundle size**           | Larger — includes fetching code in JS bundle                                      |
+| **Example use case**      | Real-time updates, user-specific actions, or anything requiring browser-only APIs |
+
+🌐 Server Component (Server-side Fetch)
+| Aspect                    | Explanation                                                    |
+| ------------------------- | -------------------------------------------------------------- |
+| **Where data is fetched** | On the **server**, before the component is sent to the browser |
+| **When data is fetched**  | During the server's render phase                               |
+| **Initial render**        | Already has the data — no loading state needed                 |
+| **Performance**           | Faster — full page with data is sent immediately               |
+| **SEO**                   | Excellent — search engines see the full data immediately       |
+| **Bundle size**           | Smaller — no fetch logic in client bundle                      |
+| **Example use case**      | Static pages, SEO content, product listings, blogs, etc.       |
+

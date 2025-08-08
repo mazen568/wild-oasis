@@ -1,0 +1,73 @@
+
+
+export default function Home() {
+  return (
+    // <div className="my-10 text-center sm:my-16 grid h-screen grid-rows-[auto_1fr_auto]">
+    //   <h1 className="text-xl font-semibold
+    //    mb-8 sm:text-2xl bg-blue-700">The best Pizza
+    //     <br />
+    //     <span className="text-yellow-500">
+    //       Straight out of the oven, Straight to you
+    //     </span>
+    //   </h1>
+    //   <CreateUser />
+    //   <PizzaDetails/>
+    // </div>
+    // <div className="grid grid-cols-[320px_1fr_220px]  h-screen grid-rows-[auto_1fr]">
+    //   <nav className="col-span-3 flex justify-between px-4 py-4 border-stone-500 border-b-4 ">
+    //     <span className="">HBank</span>
+    //     <span className="">Mazen</span>
+    //   </nav>
+    //   <aside className="row-span-1  border-stone-500 border-r-4 p-4">
+    //     <nav className="space-y-4">
+    //       <div className="font-bold text-lg mb-2">Dashboard</div>
+    //       <ul className="space-y-2 text-sm text-gray-300">
+    //         <li className="hover:text-white">Performance</li>
+    //         <li className="hover:text-white">Hotjar</li>
+    //         <li className="hover:text-white">Tickets</li>
+    //         <li className="hover:text-white">Agents</li>
+    //         <li className="hover:text-white">Customers</li>
+    //         <li className="hover:text-white">Products</li>
+    //         <li className="hover:text-white">Orders</li>
+    //         <li className="hover:text-white">Reports</li>
+    //       </ul>
+    //     </nav>
+
+    //   </aside>
+    //   <main className=" p-4 border-r-4 border-stone-500">    
+    //     <nav className="space-y-4 border-2  border-stone-500 rounded-md p-4">
+    //     <div className="font-bold text-lg mb-2">Inventory Details</div>
+    //     <ul className="space-y-2 text-sm text-gray-300">
+    //       <li className="hover:text-white">Performance</li>
+    //       <li className="hover:text-white">Hotjar</li>
+    //       <li className="hover:text-white">Tickets</li>
+    //       <li className="hover:text-white">Agents</li>
+    //       <li className="hover:text-white">Customers</li>
+    //       <li className="hover:text-white">Products</li>
+    //       <li className="hover:text-white">Orders</li>
+    //       <li className="hover:text-white">Reports</li>
+    //     </ul>
+    //   </nav>
+    //   </main>
+    //   <aside><nav className="space-y-4 row-span-1 border-2 border-stone-500 rounded-md p-4 mt-4 mx-3">
+    //     <div className="font-bold text-lg mb-2">Card Details</div>
+    //     <ul className="space-y-2 text-sm text-gray-300">
+    //       <li className="hover:text-white">Performance</li>
+    //       <li className="hover:text-white">Hotjar</li>
+    //       <li className="hover:text-white">Tickets</li>
+    //       <li className="hover:text-white">Agents</li>
+    //       <li className="hover:text-white">Customers</li>
+    //       <li className="hover:text-white">Products</li>
+    //       <li className="hover:text-white">Orders</li>
+    //       <li className="hover:text-white">Reports</li>
+    //     </ul>
+    //   </nav></aside>
+    // </div>
+
+     
+    
+    <>
+    
+    </>
+  );
+}
