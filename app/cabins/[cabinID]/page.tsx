@@ -15,7 +15,10 @@ export default async function page({ params }: { params: Promise<{ cabinID: numb
   const { cabinID } = await params
   const cabin = await getCabin(cabinID);
   console.log(cabin);
-  
+  // if(!cabin){
+  //   notFound();
+  // }
+  //not working
 
   return (
     <div className="flex flex-col md:flex-row mx-auto max-w-6xl ">
