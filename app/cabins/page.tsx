@@ -1,19 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import Title from '../_components/Title';
-import { getCabins } from '../_lib/data-service';
-import CabinCard from '../_components/CabinCard';
-import { revalidatePath } from 'next/cache';
-
-
+import { Suspense } from 'react';
+import CabinsList from '../_components/CabinsList';
+import Loading from "@/app/cabins/loading"
 export const metadata = {
   title: "cabins"
 }
-export default async function page() {
-
-  const cabins = await getCabins();
-  revalidatePath('/cabins')
-  console.log("cabins fetched : ", cabins);
+export default function page() {
 
 
   return (
@@ -29,20 +23,9 @@ export default async function page() {
           to paradise.
         </p>
       </div>
-      {cabins.length > 0 ? (<div className='grid md:grid-cols-2 gap-10'>
-        {
-          cabins.map((cabin) =>
-            <CabinCard
-              name={cabin.name!}
-              maxCapacity={cabin.max_capacity!}
-              regularPrice={cabin.regular_price!}
-              discount={cabin.discount!}
-              image={cabin.image!}
-            />
-          )
-        }
-      </div>) : <p>There are no cabins available</p>
-      }
+      <Suspense fallback={<Loading/>}>
+        <CabinsList/>
+      </Suspense>
 
     </>
   )

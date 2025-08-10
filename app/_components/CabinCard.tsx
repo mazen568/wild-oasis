@@ -2,15 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { UsersIcon } from "@heroicons/react/24/solid";
 type CabinCardProps={
+    id:number;
     name:string;
     maxCapacity:number;
     regularPrice: number,
     discount: number,
     image: string
+    
 
 }
 
-function CabinCard({  name, maxCapacity, regularPrice, discount, image }:CabinCardProps) {
+function CabinCard({
+     id,
+     name,
+     maxCapacity,
+     regularPrice,
+     discount,
+     image    
+    }:CabinCardProps) {
   
 
   return (
@@ -20,11 +29,12 @@ function CabinCard({  name, maxCapacity, regularPrice, discount, image }:CabinCa
           src={image}
           fill
           alt={`Cabin ${name}`}
+          
           className="object-cover border-r border-primary-800"
         />
       </div>
 
-      <div className="flex-grow">
+      <div className="flex-[2] ">
         <div className="pt-5 pb-4 px-7 bg-primary-950">
           <h3 className="text-accent-500 font-semibold text-2xl mb-3">
             Cabin {name}
@@ -56,7 +66,7 @@ function CabinCard({  name, maxCapacity, regularPrice, discount, image }:CabinCa
 
         <div className="bg-primary-950 border-t border-t-primary-800 text-right">
           <Link
-            href={`/cabins/`}
+            href={`cabins/${id}`}
             className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"
           >
             Details & reservation &rarr;
