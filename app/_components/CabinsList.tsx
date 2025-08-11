@@ -1,10 +1,8 @@
 import React from 'react'
-import { revalidatePath } from 'next/cache';
 import { getCabins } from '../_lib/data-service';
 import CabinCard from './CabinCard';
 export default async function CabinsList() {
     const cabins = await getCabins();
-    revalidatePath('/cabins')
     console.log("cabins fetched : ", cabins);
     return (
 

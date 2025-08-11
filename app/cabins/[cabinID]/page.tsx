@@ -1,7 +1,7 @@
-import { getCabin } from "@/app/_lib/data-service"
+import { getCabin,getCabins } from "@/app/_lib/data-service"
 import Image from "next/image";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
-
+import { notFound } from "next/navigation";
 export async function generateMetadata({params}:{params:Promise<{cabinID:number}>}){
   const {cabinID} = await params
   const cabin = await getCabin(cabinID);
@@ -9,16 +9,19 @@ export async function generateMetadata({params}:{params:Promise<{cabinID:number}
     title:`Cabin ${cabin.name}`
   }
 }
-
+export async function generateStaticParams(){
+  const cabins=await getCabins();
+  const cabinIDs=cabins.map(cabin=> ({cabinID:String(cabin.id)}) );
+  return cabinIDs;
+}
 
 export default async function page({ params }: { params: Promise<{ cabinID: number }> }) {
   const { cabinID } = await params
   const cabin = await getCabin(cabinID);
   console.log(cabin);
-  // if(!cabin){
-  //   notFound();
-  // }
-  //not working
+  if(!cabin){
+      notFound();
+  }
 
   return (
     <div className="flex flex-col md:flex-row mx-auto max-w-6xl ">
