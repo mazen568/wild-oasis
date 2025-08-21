@@ -3,6 +3,7 @@ import { getCabins } from '../_lib/data-service';
 import CabinCard from './CabinCard';
 export default async function CabinsList() {
     const cabins = await getCabins();
+
     console.log("cabins fetched : ", cabins);
     return (
 

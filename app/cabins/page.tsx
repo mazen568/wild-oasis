@@ -4,9 +4,13 @@ import Title from '../_components/Title';
 import { Suspense } from 'react';
 import CabinsList from '../_components/CabinsList';
 import Loading from "@/app/cabins/loading"
+
+export const revalidate=3600;
+
 export const metadata = {
   title: "cabins"
 }
+
 export default function page() {
 
 
