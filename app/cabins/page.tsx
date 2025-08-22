@@ -11,8 +11,17 @@ export const metadata = {
   title: "cabins"
 }
 
-export default function page() {
 
+type CabinProps={
+  searchParams:{
+    capacity?:"small"|"medium"|"large"
+  }
+}
+
+
+export default function page({searchParams}:CabinProps) {
+
+  const filter=searchParams?.capacity?? "all" ;
 
   return (
     <>
@@ -27,8 +36,8 @@ export default function page() {
           to paradise.
         </p>
       </div>
-      <Suspense fallback={<Loading/>}>
-        <CabinsList/>
+      <Suspense fallback={<Loading/>} key={filter}>
+        <CabinsList filter={filter}/>
       </Suspense>
 
     </>
