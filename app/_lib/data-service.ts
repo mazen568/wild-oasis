@@ -2,6 +2,8 @@
 import { supabase } from "./supabase";
 import { eachDayOfInterval } from 'date-fns';
 import { Database } from "@/supabase/types";
+import axios from "axios";
+import { Country } from "../types/country";
 
 /////////////
 // GET
@@ -12,6 +14,9 @@ export async function getCabin(id: number) {
     .select('*')
     .eq('id', id)
     .single();
+
+   
+  //  await new Promise ((res)=>setTimeout(res,2000))
 
   if (error) {
     console.error(error);
@@ -98,7 +103,7 @@ export async function getBookings(guestId: number) {
   >;
 }
 
-export async function getBookedDatesByCabinId(cabinId: number) {
+export async function getBookedDatesByCabinId(cabinId: number): Promise<Date[]> {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   const todayISO = today.toISOString();
@@ -129,8 +134,10 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   return bookedDates;
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Database['public']['Tables']['settings']['Row']> {
   const { data, error } = await supabase.from('settings').select('*').single();
+   
+
 
   if (error) {
     console.error(error);
@@ -142,11 +149,11 @@ export async function getSettings() {
 
 export async function getCountries() {
   try {
-    const res = await fetch(
+    const res = await axios.get<Country[]>(
       'https://restcountries.com/v2/all?fields=name,flag'
     );
-    const countries = await res.json();
-    return countries;
+    
+    return res.data;
   } catch {
     throw new Error('Could not fetch countries');
   }
